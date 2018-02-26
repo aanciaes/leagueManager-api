@@ -1,6 +1,11 @@
 package com.leaguemanager
 
-fun main (args: Array<String>) {
+import org.springframework.boot.SpringApplication
+import org.springframework.boot.autoconfigure.SpringBootApplication
 
-    println ("Hello World")
+@SpringBootApplication
+open class Application
+
+fun main(args: Array<String>) {
+    SpringApplication.run(Application::class.java, *args)
 }
