@@ -1,0 +1,39 @@
+app:
+  name: leagueManager-api
+  description: League Manager Backend API
+
+---
+#Active environment
+spring:
+  profiles:
+    active: dev
+
+---
+#Dev settings
+spring:
+  profiles: dev
+  #datasource:
+      #url: jdbc:h2:file:./devDb
+      #username: sa
+      #password:
+      #driverClassName: org.h2.Driver
+
+    #jpa:
+      #database-platform: org.hibernate.dialect.H2Dialect
+      #hibernate:
+        #ddl-auto: create-drop
+
+  #Logging
+  #logging:
+    #config: classpath:logging/dev-logback-spring.groovy
+
+server:
+  port: 8080
+
+---
+#Prod settings
+spring:
+  profiles: prod
+
+server:
+  port: 8080
