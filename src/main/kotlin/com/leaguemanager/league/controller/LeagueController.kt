@@ -1,16 +1,24 @@
 package com.leaguemanager.league.controller
 
 import com.leaguemanager.league.model.League
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RequestMethod
-import org.springframework.web.bind.annotation.RestController
+import com.leaguemanager.league.service.LeagueService
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping(value = "/league")
 class LeagueController {
 
-    @RequestMapping(method = arrayOf(RequestMethod.GET))
-    fun createLeague (league: League) {
-        println ("First Controller")
+    @Autowired
+    lateinit var leagueService : LeagueService
+
+    @RequestMapping(method = arrayOf(RequestMethod.POST))
+    fun createLeague (@RequestBody league: League): League {
+        return leagueService.createLeague(league)
+    }
+
+    @RequestMapping(value = "/{leagueId}", method = arrayOf(RequestMethod.GET))
+    fun getLeagueById (@PathVariable leagueId: Long): League {
+        return leagueService.getLeagueById(leagueId)
     }
 }
