@@ -16,6 +16,6 @@ class LeagueService {
     }
 
     fun getLeagueById (leagueId: Long): League {
-        return leagueRepository.findOne(leagueId)
+        return leagueRepository.findById(leagueId).get()
     }
 }
