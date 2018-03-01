@@ -1,5 +1,6 @@
 package com.leaguemanager.league.controller
 
+import com.leaguemanager.league.exceptions.BadRequestException
 import com.leaguemanager.league.model.League
 import com.leaguemanager.league.service.LeagueService
 import org.springframework.beans.factory.annotation.Autowired
@@ -14,6 +15,9 @@ class LeagueController {
 
     @RequestMapping(method = arrayOf(RequestMethod.POST))
     fun createLeague (@RequestBody league: League): League {
+        if(!league.validate()){
+            throw BadRequestException()
+        }
         return leagueService.createLeague(league)
     }
 
