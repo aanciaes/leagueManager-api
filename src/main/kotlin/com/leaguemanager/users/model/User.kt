@@ -1,4 +1,4 @@
-package com.leaguemanager.users
+package com.leaguemanager.users.model
 
 import com.leaguemanager.league.model.League
 import javax.persistence.*
