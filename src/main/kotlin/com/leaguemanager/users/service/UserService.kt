@@ -3,8 +3,10 @@ package com.leaguemanager.users.service
 import com.leaguemanager.users.exceptions.DuplicatedUserException
 import com.leaguemanager.users.exceptions.EmailAlreadyExistsException
 import com.leaguemanager.users.exceptions.UserNotFoundException
+import com.leaguemanager.users.exceptions.WrongFormatEmailException
 import com.leaguemanager.users.model.User
 import com.leaguemanager.users.model.UserRepository
+import org.apache.commons.validator.routines.EmailValidator
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.crypto.password.PasswordEncoder
@@ -24,6 +26,9 @@ class UserService {
 
         if (userRepository.existsByMail(user.mail))
             throw EmailAlreadyExistsException()
+
+        if (!EmailValidator.getInstance().isValid(user.mail))
+            throw WrongFormatEmailException()
 
         user.hashedPassword = passwordEncoder().encode(user.hashedPassword)
         return userRepository.save(user)
