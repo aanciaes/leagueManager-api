@@ -1,5 +1,6 @@
 package com.leaguemanager.users.model
 
+import com.fasterxml.jackson.annotation.JsonProperty
 import com.leaguemanager.league.model.League
 import javax.persistence.*
 import javax.validation.constraints.Email
@@ -13,6 +14,7 @@ class User (@Id @GeneratedValue(strategy = GenerationType.AUTO)
             @Email @Column (unique = true)
             var mail : String,
 
+            @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
             var hashedPassword: String) {
 
     @OneToMany(cascade = arrayOf(CascadeType.ALL), fetch = FetchType.LAZY)
