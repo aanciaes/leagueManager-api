@@ -53,6 +53,12 @@ services:
 
 (if folder names are different, change on docker-compose.yml to match those names)
 
+### Run frontend and backend containers
+
+```
+docker-compose up --build
+```
+
 ### Documentation
 
 Full documentation on http://localhost:8080/swagger-ui.html
