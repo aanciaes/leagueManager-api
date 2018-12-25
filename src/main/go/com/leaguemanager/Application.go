@@ -1,23 +1,27 @@
 package main
 
 import (
-	"fmt"
-	"io"
+	"./config/database"
+	"./users"
+	"github.com/gorilla/mux"
+	"log"
 	"net/http"
 )
 
-func hello(w http.ResponseWriter, r *http.Request) {
-	var _, err = io.WriteString(w, "Hello world from go lang!")
-	if err != nil {
-		fmt.Printf("An error occured: %d", err)
-	}
+func setHandlers (r *mux.Router) {
+	r.HandleFunc("/", users.Hello)
 }
 
 func main() {
-	http.HandleFunc("/", hello)
-	var err = http.ListenAndServe(":8000", nil)
+	r := mux.NewRouter()
+	setHandlers(r)
 
-	if err != nil {
-		fmt.Printf("An error occurred while starting the server\nErr: %s", err)
+	_, err := database.ConfigDatabase()
+
+	if err == nil {
+		log.Println("Starting server, listening at port 8000")
+		log.Fatal(http.ListenAndServe(":8000", r))
+	} else {
+		log.Fatal(err)
 	}
 }
