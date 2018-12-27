@@ -9,7 +9,15 @@ import (
 )
 
 func setHandlers (r *mux.Router) {
-	r.HandleFunc("/", users.Hello)
+	r.Handle("/", handlerGenericWrapper(users.Hello))
+}
+
+func handlerGenericWrapper (h http.HandlerFunc) http.Handler {
+	return http.HandlerFunc( func (w http.ResponseWriter, r *http.Request) {
+		log.Println("Before")
+		h.ServeHTTP(w, r)
+		defer log.Println("After")
+	})
 }
 
 func main() {

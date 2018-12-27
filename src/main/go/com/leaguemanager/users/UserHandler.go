@@ -2,13 +2,12 @@ package users
 
 import (
 	"fmt"
-	"io"
 	"net/http"
 )
 
 func Hello(w http.ResponseWriter, r *http.Request) {
-	var _, err = io.WriteString(w, "Hello world from go lang!")
+	var _, err = fmt.Fprintf(w, "Hello world from go lang!")
 	if err != nil {
-		fmt.Printf("An error occured: %d", err)
+		_, _ = fmt.Fprintf(w, "An error occured: %d", err)
 	}
 }
