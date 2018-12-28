@@ -1,8 +1,8 @@
-package src
+package main
 
 import (
-	"./config/database/database"
-	"./users"
+	"github.com/aanciaes/leagueManager-api/config/database"
+	"github.com/aanciaes/leagueManager-api/users"
 	"github.com/gorilla/mux"
 	"log"
 	"net/http"
