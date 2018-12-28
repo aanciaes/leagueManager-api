@@ -1,7 +1,7 @@
-package main
+package src
 
 import (
-	"./config/database"
+	"./config/database/database"
 	"./users"
 	"github.com/gorilla/mux"
 	"log"
